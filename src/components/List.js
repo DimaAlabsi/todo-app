@@ -24,7 +24,7 @@ function List(props) {
             <small>Difficulty: {item.difficulty}</small>
           </p>
 
-          <Button onClick={() => props.toggleComplete(item.id)}>
+          <Button  onClick={() => props.toggleComplete(item.id)}>
             Complete: {item.complete.toString()}</Button>
             <Button  onClick={() => props.deleteItem(item.id)} type="submit"  intent="danger" text="delete" />
 

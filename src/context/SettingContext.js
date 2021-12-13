@@ -1,12 +1,12 @@
 import React from 'react';
-export const SettingssContext=React.createContext();
+export const SettingssContext = React.createContext();
 import { useState } from 'react';
 import { useEffect } from 'react';
  function SettingContext(props) {
 
 const [display,setDisplay]=useState(false)
 const [numOfItems,setNumOfItems]=useState(2)
-const [defaultSort,setDefaultSort]=useState('you have to do this')
+const [defaultSort,setDefaultSort]=useState('do')
 const state ={
 display ,
 numOfItems,
