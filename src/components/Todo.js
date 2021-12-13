@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import useForm from '../hooks/Form';
 import List from './List';
 import { v4 as uuid } from 'uuid';
-import { Button } from '@blueprintjs/core';
+import { Button, FormGroup } from '@blueprintjs/core';
 import {  Card, Elevation } from "@blueprintjs/core";
 const ToDo = () => {
   const [list, setList] = useState([]);
@@ -68,20 +68,24 @@ const ToDo = () => {
 <label>
   <span>Difficulty</span>
 
-  <input  onChange={handleChange} defaultValue={3} type="range" min={1} max={5} name="difficulty" class="bp3-input .modifier"  type="text"  dir="auto" />
-
+  <input  onChange={handleChange}     defaultValue={3} type="range" min={1}
+                  max={5}
+                  name="difficulty"
+                  dir="auto"
+                />
 </label>
 
 <label>
-  <Button   type="submit" rightIcon="arrow-right" intent="success" text="Add Item" />
+  <Button data-testid="button-test"  type="submit" rightIcon="arrow-right" intent="success" text="Add Item" />
 
 </label>
 </form>
-      <List  list={list} toggleComplete={toggleComplete} />
+
+      <List  list={list} toggleComplete={toggleComplete} deleteItem={deleteItem}/>
     </div>
   </div>
   </Card>
-  );
+  )
 };
 
 export default ToDo;

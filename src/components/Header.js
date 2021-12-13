@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Navbar, Button, Alignment } from "@blueprintjs/core";
+import { Link } from "react-router-dom";
 
  class Header extends Component {
     render() {
@@ -8,11 +9,17 @@ import { Navbar, Button, Alignment } from "@blueprintjs/core";
             <Navbar.Group align={Alignment.LEFT}>
                 <Navbar.Heading>TO DO List Manager 📔</Navbar.Heading>
                 <Navbar.Divider />
-                <Button className="bp3-minimal" icon="home" text="Home" />
-                <span class="bp3-navbar-divider"></span>
-      <Button class="bp3-Button bp3-minimal bp3-icon-user"></Button>
+                <a href="/todo-app">
+            <Button className="bp3-minimal" icon="home" text="Home" />
+          </a>
+          <a href="/form">
+            <Button
+              className="bp3-minimal"
+              icon="document"
+              text="setting"
+            ></Button>
+          </a>
       <Button class="bp3-Button bp3-minimal bp3-icon-notifications"></Button>
-      <Button class="bp3-button bp3-minimal bp3-icon-cog"></Button>
             </Navbar.Group>
         </Navbar>
         )

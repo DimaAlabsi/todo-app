@@ -1,12 +1,30 @@
 import React from 'react';
-export const SettingssContext=React.createContext();
-
+export const SettingssContext = React.createContext();
+import { useState } from 'react';
+import { useEffect } from 'react';
  function SettingContext(props) {
-    const state={
-show:false,
-sort:'To Do',
-itemsPerPage: 3,
-    }
+
+const [display,setDisplay]=useState(false)
+const [numOfItems,setNumOfItems]=useState(2)
+const [defaultSort,setDefaultSort]=useState('do')
+const state ={
+display ,
+numOfItems,
+defaultSort,
+setDisplay,
+setNumOfItems,
+setDefaultSort
+}
+useEffect(()=>{
+let stringArray =localStorage.getItem('SettingForm');
+let objectArray= JSON.parse(stringArray);
+
+if(objectArray){
+    setNumOfItems(Number(objectArray.numberOfItem))
+}
+localStorage.clear()
+},[])
+
     return (
         <>
           <SettingssContext.Provider value={state}>
