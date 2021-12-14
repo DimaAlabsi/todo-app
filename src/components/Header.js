@@ -9,8 +9,8 @@ import { Link } from "react-router-dom";
             <Navbar.Group align={Alignment.LEFT}>
                 <Navbar.Heading>TO DO List Manager 📔</Navbar.Heading>
                 <Navbar.Divider />
-                <a href="/todo-app">
-            <Button className="bp3-minimal" icon="home" text="Home" />
+                {/* <a href="/todo-app"> */}
+            {/* <Button className="bp3-minimal" icon="home" text="Home" />
           </a>
           <a href="/form">
             <Button
@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
               text="setting"
             ></Button>
           </a>
-      <Button class="bp3-Button bp3-minimal bp3-icon-notifications"></Button>
+      <Button class="bp3-Button bp3-minimal bp3-icon-notifications"></Button> */}
             </Navbar.Group>
         </Navbar>
         )

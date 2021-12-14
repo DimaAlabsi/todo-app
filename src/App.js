@@ -5,6 +5,8 @@ import ToDo from './components/Todo';
 import Footer from './components/Footer';
 import './App.scss';
 import Setting from './components/Setting';
+import Login from './components/Login';
+import LoginContext from './context/loginContext';
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,25 +16,28 @@ import {
 export default class App extends React.Component {
   render() {
     return (
-        <>
-         <Router>
-        <Switch>
-        <SettingContext>
-        <Route exact path="/todo-app">
-        <Header/>
-      <ToDo />
-    
-      <Footer/>
-      </Route> 
-      <Route path="/form">
-         <Header/>
-            <Setting/>
+      <>
+
+        <LoginContext>
+        <Login/>
+          <SettingContext>
+            <Header/>
+            <ToDo />
             <Footer/>
-         </Route>
-      </SettingContext>
-      </Switch>
-      </Router>
+         
+
+          </SettingContext>
+          
+        </LoginContext>
+
+
+
+
+
+
       </>
+
     );
+
   }
 }
