@@ -1,19 +1,24 @@
 import React from 'react'
-import {  Card, Elevation } from "@blueprintjs/core";
+import {  Card, Elevation, FormGroup, Button } from "@blueprintjs/core";
+
 function SettingForm() {
-    const handleChange=e=>{
+    const handleSubmit=e=>{
         e.preventDefault();
-      
-        let numberOfItem=e.target.value
+        let display=e.target.disply.value
+
+        let numberOfItem=e.target.numberOfItem.value
         
         let obj ={
-          
+            display:display,
+
+            
             numberOfItem:numberOfItem
         }
         setItem (obj)
- 
+        e.target.reset()
+        window.location.href="/";
     }
- 
+    
      
              
 function setItem (obj){
@@ -23,9 +28,29 @@ function setItem (obj){
         <div>
             <div className="toDo">
           <Card interactive={true} elevation={Elevation.TWO}>
-          <form>
-        <label>Num of Items  </label>
-        <input type="text" onChange={handleChange} />
+          <form  onSubmit={handleSubmit}>
+          <h2>Choose Setting</h2>
+              <FormGroup label="show completed tasks" labelFor="disply">
+                  <select name="disply" dir="auto" className="bp3-input .modifier">
+                      <option value={true}>true</option>
+                      <option value={false}>false</option>
+                  </select>
+               
+              </FormGroup>
+              <FormGroup label="numberOfItem per page " labelFor="assignee">
+                <input
+                  className="bp3-input .modifier"
+                  name="numberOfItem"
+                  type="text"
+                  placeholder="numberOfItem per page"
+                  dir="auto"
+                />
+              </FormGroup>
+              <br />
+              
+
+              
+                <Button type="submit" style={{background:"#008075"}}>Try ✴️</Button>
       </form>
           </Card>
         </div>

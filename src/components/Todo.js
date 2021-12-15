@@ -6,46 +6,78 @@ import List from './List';
 import { v4 as uuid } from 'uuid';
 import { Button, FormGroup } from '@blueprintjs/core';
 import { Card, Elevation } from "@blueprintjs/core";
-import Auth from './Auth';
-const ToDo = () => {
+import superagent, { saveCookies } from "superagent";
+import cookie from "react-cookies";
+// import Auth from './Auth';
+import Setting from './Setting';
+const ToDo = (props) => {
   const [list, setList] = useState([]);
   const [incomplete, setIncomplete] = useState([]);
   const { handleChange, handleSubmit } = useForm(addItem);
+  const API = "https://dimaalabsiauth-api.herokuapp.com";
 
-  function addItem(item) {
-    item.id = uuid();
-    item.complete = false;
-    setList([...list, item]);
+  // function addItem(item) {
+  //   item.id = uuid();
+  //   item.complete = false;
+  //   setList([...list, item]);
+  // }
+
+  async function addItem(item) {
+    const token = cookie.load("token");
+    let respone = await superagent
+      .post(`${API}/todo`, item)
+      .set("authorization", `Bearer ${token}`);
+   
   }
-
-  function deleteItem(id) {
-    const items = list.filter((item) => item.id !== id);
-    setList(items);
+  async function deleteItem(id) {
+    const token = cookie.load("token");
+    await superagent.delete(`${API}/todo?index=${id}`).set('authorization', `Bearer ${token}`)
+   
   }
+  async function toggleComplete(id) {
+  
+    const token = cookie.load("token");
+     let items=await props.list.map((item,index)=>{
+         if(id===index){
+           if(item.complete==='complete'){
+             item.complete='pending'
+           }else{
+             item.complete='complete'
+           }
+           return item
+         }
+         
+     })
+     let obj={
+       toDo: items[id].toDo,
+       assignee: items[id].assignee,
+       difficulty: items[id].difficulty,
+       complete:items[id].complete
+     }
+    
+     let respone = await superagent.put(`${API}/todo?index=${id}`,obj).set('authorization', `Bearer ${token}`)
+     
+     props.setList(respone.body.todo)
+ 
+   
+   }
 
-  function toggleComplete(id) {
-    const items = list.map((item) => {
-      if (item.id == id) {
-        item.complete = !item.complete;
-      }
-      return item;
-    });
+   useEffect(async () => {
+    const token = cookie.load("token");
+    let respone = await superagent.get(`${API}/todo`).set('authorization', `Bearer ${token}`)
+    
+    props.setList(respone.body.todo)
+    
 
-    setList(items);
-  }
-
-  useEffect(() => {
-    let incompleteCount = list.filter((item) => !item.complete).length;
-    setIncomplete(incompleteCount);
-    document.title = `To Do List: ${incomplete}`;
-  }, [list]);
+  },[props.list])
+ 
 
   return (
 
-<Auth capability='create'>
+<>
     <Card interactive={true} elevation={Elevation.TWO}>
       <div className="mainsec">
-        <h2 id='h2'>To Do List: {incomplete.length} items pending </h2>
+      <h1>To Do List  ({incomplete})</h1>
 
         <div className="mainCards">
 
@@ -86,7 +118,8 @@ const ToDo = () => {
         </div>
       </div>
     </Card>
-    </Auth>
+    <Setting/>
+    </>
   )
 };
 

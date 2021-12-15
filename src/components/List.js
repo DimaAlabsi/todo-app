@@ -4,11 +4,15 @@ import { useContext } from 'react';
 import { SettingssContext } from '../context/SettingContext';
 import { Button } from '@blueprintjs/core';
 import ReactPaginate from "react-paginate";
+import superagent , { saveCookies } from 'superagent';
+import cookie from "react-cookies";
+import Auth from './Auth'
 function List(props) {
   const settings = useContext(SettingssContext)
   const [pageNumber, setPageNumber] = useState(0);
   const usersPage = settings.numOfItems;
   const pages = pageNumber * usersPage;
+  const API = 'https://dimaalabsiauth-api.herokuapp.com'
 
   const displayUsers = props.list.slice(pages, pages + usersPage)
     .map((item) => {
@@ -24,9 +28,15 @@ function List(props) {
             <small>Difficulty: {item.difficulty}</small>
           </p>
 
-          <Button  onClick={() => props.toggleComplete(item.id)}>
+          {/* <Button  onClick={() => props.toggleComplete(item.id)}>
             Complete: {item.complete.toString()}</Button>
-            <Button  onClick={() => props.deleteItem(item.id)} type="submit"  intent="danger" text="delete" />
+            <Button  onClick={() => props.deleteItem(item.id)} type="submit"  intent="danger" text="delete" /> */}
+
+<Auth capability="update">
+  
+   <Button onClick={() => props.toggleComplete(item.id)}>
+         {item.complete.toString()==="true"?<div style={{background:"green"}}>Completed</div>:<div style={{background:"pink"}}>Pending</div>}</Button>        </Auth>
+         <Auth capability="delete"> <Button style={{background:"#008075"}} intent="danger" onClick={() => props.deleteItem(item.id)}>Delete</Button></Auth>
 
         </div>
       );
