@@ -3,7 +3,7 @@ import React, { useState,useContext } from 'react'
 import { LoginContext } from "../context/loginContext";
 function Signup() {
     let  context=useContext(LoginContext)
-	// console.log(conv);
+
 	let [userName,setUserName]=useState('')
 	let [password,setPassword]=useState('')
     let [role,setRole]=useState('user')
@@ -19,7 +19,7 @@ function Signup() {
 	}
 	const handlerSubmit=async e=>{
 		e.preventDefault();
-		// handle login function 
+
 		await context.signUp(userName, password,role)
         window.location.href="/"
 	}

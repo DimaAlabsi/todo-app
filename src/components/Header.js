@@ -11,9 +11,9 @@ function Header() {
           
         </div>
         <div className="bp3-navbar-group bp3-align-right">
-       */}
+   
 
-          <button className="bp3-button bp3-minimal bp3-icon-log-out" onClick={context.logout} >log-out</button>
+          <button className="bp3-button bp3-minimal bp3-icon-log-out" onClick={context.logout} >log out</button>
           
         </div>
       </nav>

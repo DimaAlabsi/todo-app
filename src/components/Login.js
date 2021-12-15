@@ -9,7 +9,7 @@ function LoginForm() {
 		window.location.href="/signup"
 	}
 	let  context=useContext(LoginContext)
-	// console.log(conv);
+	
 	let [userName,setUserName]=useState('')
 	let [password,setPassword]=useState('')
 
@@ -21,7 +21,7 @@ function LoginForm() {
 	}
 	const handlerSubmit=async e=>{
 		e.preventDefault();
-		// handle login function 
+	
 		await context.login(userName, password);
     window.location.href="/"
 		
